@@ -1,0 +1,35 @@
+// Colors
+$color-dark-rgb: rgb(28, 29, 32);
+$color-light-rgb: rgb(254, 254, 254);
+$color-dark: rgba(($color-dark-rgb), 1);
+$color-light: rgba(($color-light-rgb), 1);
+$color-light-dark: #f7f7f7;
+$color-border: #ededed;
+$color-grey: #adadad;
+$color-100: #79caf9;
+$color-100-bg: #def3ff;
+$color-success: #008a49;
+$color-error: #e66963;
+$color-svg-dark: invert(8%) sepia(10%) saturate(1045%) hue-rotate(192deg)
+  brightness(95%) contrast(92%);
+$color-svg-light: invert(100%) sepia(0%) saturate(0%) brightness(100%)
+  contrast(100%);
+$color-svg-grey: invert(78%) sepia(0%) saturate(0%) hue-rotate(188deg)
+  brightness(88%) contrast(90%);
+$color-svg-100: invert(82%) sepia(21%) saturate(958%) hue-rotate(179deg)
+  brightness(101%) contrast(96%);
+
+// Animation
+$animation-primary: 0.5s ease;
+
+// Typography
+$btn-desktop: 1.125rem;
+$btn-mobile: 1rem;
+$btn-s: 0.875rem;
+
+// Spacing
+$section-padding: 1.25em;
+
+// Others
+$border-radius: 20em;
+$border-radius-s: 25px;
