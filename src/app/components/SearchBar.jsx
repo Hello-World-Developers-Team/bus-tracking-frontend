@@ -7,12 +7,12 @@ import BtnIcon from "./Buttons/BtnIcon";
 
 export default function SearchBar({ hasFocus, text }) {
   return (
-    <div className={`searchBar-wrapper ${hasFocus && "hasFocus"}`}>
-      {hasFocus && <BtnIcon svg={BackSVG} />}
+    <div className={`searchBar-wrapper ${hasFocus ? "hasFocus" : ""}`}>
+      {hasFocus && <BtnIcon svg={BackSVG} shadow={false} />}
       <form action="">
         <input type="text" placeholder={text} />
       </form>
-      <BtnIcon svg={hasFocus ? DeleteSVG : SearchSVG} />
+      <BtnIcon svg={hasFocus ? DeleteSVG : SearchSVG} shadow={false} />
     </div>
   );
 }

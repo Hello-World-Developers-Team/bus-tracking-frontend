@@ -9,6 +9,10 @@
   font-family: "Century Burma";
 }
 
+.color-100 {
+  color: variables.$color-100 !important;
+}
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -26,7 +30,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.15em;
+  gap: 0.25em;
   font-size: variables.$btn-mobile;
   // font-size: 1.12rem;
   padding: 0.65em 1.3em;
@@ -34,7 +38,12 @@
   color: variables.$color-light;
   background-color: variables.$color-100;
 
-  & img {
+  &.disable {
+    cursor: not-allowed;
+    opacity: 0.4;
+  }
+
+  & Image {
     width: 1.15rem;
     aspect-ratio: 1;
   }
@@ -54,6 +63,10 @@
   & img {
     filter: variables.$color-svg-dark;
   }
+}
+
+.btn-S {
+  font-size: variables.$btn-s;
 }
 
 .btn-nav {
@@ -120,6 +133,15 @@
 
 .btnIcon {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  aspect-ratio: 1;
+  border-radius: variables.$border-radius;
+
+  &.shadow {
+    background-color: variables.$color-light-dark;
+  }
 }
 
 .nav-container {
@@ -136,6 +158,7 @@
 }
 
 .popUp-container {
+  display: none;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
   scrollbar-width: none;
@@ -146,8 +169,16 @@
   position: fixed;
   z-index: 21;
   width: 100%;
-  max-height: 100dvh;
+  height: auto;
   background-color: variables.$color-light;
+
+  &.active {
+    display: block;
+  }
+
+  &.hasFocus {
+    height: 100dvh;
+  }
 }
 
 .mainSearchBar-container {
@@ -283,11 +314,20 @@
 .bottomSheet-container {
   position: absolute;
   bottom: 0;
-  z-index: 20;
+  z-index: 25;
   display: none;
   width: 100%;
+  max-height: 50dvh;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
   border-top-left-radius: variables.$border-radius-s;
   border-top-right-radius: variables.$border-radius-s;
+  border-top: 1.5px solid variables.$color-border;
   background-color: variables.$color-light;
 
   &.active {
@@ -316,12 +356,7 @@
 
 .results-container {
   overflow: hidden;
-  margin-block: 1.5em;
-
-  & h3 {
-    font-size: 1rem;
-    padding-inline: variables.$section-padding;
-  }
+  margin-block: 0.5em 1.5em;
 }
 
 .modal-container {
@@ -364,7 +399,7 @@
   }
 }
 
-.busTrackResults-container {
+.busTrackResults {
   display: flex;
   gap: 1.25rem;
   padding-block: 1em;
@@ -382,10 +417,12 @@
   cursor: pointer;
   text-align: center;
   display: flex;
+  flex-shrink: 0;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 1.25em;
+  width: 160px;
+  padding: 1em;
   border: 1px solid variables.$color-border;
   border-radius: variables.$border-radius-s;
 
@@ -412,6 +449,7 @@
 
     & .resultBusLines-container {
       display: flex;
+      justify-content: center;
       gap: 0.15em;
       margin-block-start: 0.25em;
 
@@ -426,11 +464,17 @@
         border-radius: variables.$border-radius;
         background-color: variables.$color-100;
       }
+
+      & .busLine-plus {
+        color: variables.$color-dark;
+        background-color: variables.$color-light;
+        border: 1px solid variables.$color-border;
+      }
     }
   }
 }
 
-.resultCTA-container {
+.busTrackResultCTA-container {
   padding-inline: variables.$section-padding;
 
   & > button {
@@ -449,12 +493,40 @@
 }
 
 .contentCTA-container {
-  padding-block: 1em;
-  padding-inline: variables.$section-padding;
+  display: flex;
+  gap: 1em;
+  padding-block-start: 1em;
+  background-color: variables.$color-light;
+}
 
-  & > button {
-    text-align: center;
-    width: 100%;
+.right-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  & h5 {
+    font-size: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: variables.$border-radius;
+
+  &.shadow {
+    background-color: variables.$color-light-dark;
+  }
+
+  & img {
+    filter: variables.$color-svg-dark;
   }
 }
 
@@ -466,30 +538,17 @@
   padding-block: 0.5em;
   padding-inline: variables.$section-padding;
 
-  & .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    aspect-ratio: 1;
-    border-radius: variables.$border-radius;
-    background-color: variables.$color-100-bg;
-
-    & Image {
-      width: 0.25rem !important;
-    }
-  }
-
   & h5 {
     font-size: 1rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 300px;
+    color: rgba(variables.$color-dark, 0.8);
   }
 
   &:hover {
-    background-color: variables.$color-border;
+    background-color: variables.$color-light-dark;
   }
 }
 
@@ -498,6 +557,7 @@
 }
 
 .busTrack-recent-container h3 {
+  font-size: 1rem;
   padding-inline: variables.$section-padding;
 }
 
@@ -511,4 +571,118 @@
   & > button {
     width: 100%;
   }
+}
+
+.btnDiv {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-block: 1em;
+  padding-inline: variables.$section-padding;
+  font-size: 1rem;
+  color: variables.$color-100;
+
+  &:hover {
+    background-color: variables.$color-light-dark;
+  }
+}
+
+.resultsContent-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: variables.$section-padding;
+
+  & h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+}
+
+.directionTime-container {
+  padding-block: 1em;
+  padding-inline: variables.$section-padding;
+  border-bottom: 1.5px solid variables.$color-border;
+
+  & h4 {
+    font-size: 1.25rem;
+  }
+
+  & > span {
+    font-size: 0.9rem;
+    color: variables.$color-grey;
+  }
+}
+
+.directionSteps-container {
+  padding-block: 1em;
+  padding-inline: variables.$section-padding;
+
+  & h4 {
+    font-size: 1rem;
+    padding-block-end: 0.5em;
+  }
+}
+
+.directionStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  padding-block: 0.85em;
+
+  &-content {
+    width: 100%;
+    & h5 {
+      font-size: 1rem;
+      padding-block-end: 0.85em;
+    }
+
+    & span {
+      position: relative;
+      display: block;
+      width: 100%;
+      font-size: 0.9rem;
+      color: variables.$color-grey;
+
+      &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        background-color: variables.$color-border;
+      }
+    }
+  }
+}
+
+.destination {
+  display: flex;
+  align-items: flex-start;
+  gap: 1em;
+  padding-block: 0.85em;
+
+  &-content {
+    & h5 {
+      font-size: 1rem;
+      padding-block-end: 0.5em;
+    }
+
+    & span {
+      display: flex;
+      align-items: center;
+      gap: 0.25em;
+      font-size: 0.85rem;
+      color: variables.$color-grey;
+
+      & img {
+        filter: variables.$color-svg-dark;
+      }
+    }
+  }
+}
+
+.resultActions-container {
+  display: flex;
+  gap: 0.5em;
 }
